@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei",'Arial';
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #f6f6f6;
+    background-image: url(../img/footer.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center bottom;
+    background-attachment: fixed;
+}
+.text-blue {
+    color: #20A0FF;
+}
+.text-success {
+    color: #13CE66;
+}
+.text-warning {
+    color: #F7BA2A;
+}
+.text-darkgreen {
+    color: #1d7060;
+}
