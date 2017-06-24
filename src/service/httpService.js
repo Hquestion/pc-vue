@@ -21,7 +21,7 @@ export default {
                 responseType: options.responseType || 'json',
                 timeout: options.timeout || TIME_OUT,
                 before: options.before || EMPTY_METHOD,
-                progress: option.progress || EMPTY_METHOD
+                progress: options.progress || EMPTY_METHOD
             }).then((res) => {
                 if(res.ok) {
                     let jsonData = res.json();
@@ -43,6 +43,32 @@ export default {
         });
     },
     post(url, data, options, ignoreLoading){
-
+        options = options || {};
+        return new Promise((resolve, reject) => {
+            Vue.http.post(url, JSON.stringify(data), {
+                responseType: options.responseType || 'json',
+                timeout: options.timeout || TIME_OUT,
+                before: options.before || EMPTY_METHOD,
+                progress: options.progress || EMPTY_METHOD
+            }).then((res) => {
+                if(res.ok) {
+                    let jsonData = res.json().then((resp)=> {
+                        if(typeof resp.data.code !== 'undefined') {
+                            if(resp.data.code === 0) {
+                                resolve(resp.data);
+                            }else {
+                                reject(resp.data);
+                            }
+                        }else {
+                            resolve(resp.data);
+                        }
+                    });
+                }else {
+                    reject(res[options.responseType || 'json']())
+                }
+            }, (res)=> {
+                reject(res);
+            });
+        });
     }
 }

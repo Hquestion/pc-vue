@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+const Hello = resolve => require(['@/components/Hello'], resolve);
 const Home = resolve => require(['@/components/home/Home'], resolve);
 const Entry = resolve => require(['@/Entry'], resolve);
+const PaperBank = resolve => require(['@/components/bank/PaperBank'], resolve);
+const Login = resolve => require(['@/components/login/Login'], resolve);
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     routes: [
         {
             path: '/hello',
@@ -14,14 +16,29 @@ export default new Router({
             component: Hello
         },
         {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
             path: '/',
             name: 'Entry',
             component: Entry,
-            children: [{
-                path: '',
-                name: 'Home',
-                component: Home
-            }]
-        }
+            children: [
+                {
+                    path: '',
+                    name: 'Home',
+                    component: Home
+                },
+                {
+                    path: 'paper-bank',
+                    name: 'PaperBank',
+                    component: PaperBank
+                }
+            ]
+        },
+        { path: '*', redirect: '/' }
     ]
-})
+});
+
+export default router;

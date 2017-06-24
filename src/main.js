@@ -5,6 +5,7 @@ import App from './App'
 import '../static/css/app.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
+require('animate.css');
 
 import router from './router'
 
